@@ -1,0 +1,69 @@
+Root:
+    text_input_list: text_input_list
+    text_input_word: text_input_word
+    text_input_translate: text_input_translate
+    button_show_list: button_show_list
+    button_show_translate: button_show_translate
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Открыть файл'
+                on_release: root.show_load()
+            Button:
+                text: 'Генерировать слово'
+                on_release: root.generate()
+
+        TextInput:
+            id: text_input_list
+            text: ''
+            size_hint_y: 0.6
+
+        TextInput:
+            id: text_input_word
+            text: ''
+            size_hint_y: 0.2
+
+        TextInput:
+            id: text_input_translate
+            text: ''
+            size_hint_y: 0.2
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 30
+            ToggleButton:
+                id: button_show_list
+                text: 'Показывать список'
+                on_release: root.show_list()
+                state: 'down'
+            ToggleButton:
+                id: button_show_translate
+                text: 'Показывать перевод'
+                on_release: root.show_translate()
+                state: 'down'
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Отмена"
+                on_release: root.cancel()
+
+            Button:
+                text: "Открыть"
+                on_release: root.load(filechooser.path, filechooser.selection)
+
